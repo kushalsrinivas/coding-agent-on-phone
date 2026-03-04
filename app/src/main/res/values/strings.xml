@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PhoneAgent</string>
+    <string name="notification_channel_name">Process Manager</string>
+    <string name="notification_channel_description">Keeps agent and bot processes alive</string>
+</resources>
