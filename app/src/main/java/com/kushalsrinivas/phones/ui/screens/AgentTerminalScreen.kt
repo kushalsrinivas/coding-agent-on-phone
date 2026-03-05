@@ -7,7 +7,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.kushalsrinivas.phones.process.ProcessManager
 import com.kushalsrinivas.phones.ui.components.TerminalComposeView
 import com.kushalsrinivas.phones.viewmodel.DashboardViewModel
@@ -25,8 +24,8 @@ fun AgentTerminalScreen(viewModel: DashboardViewModel) {
         ) {
             Text(
                 text = "Agent not running. Start it from the Dashboard.",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.bodyLarge,
             )
         }
     } else {

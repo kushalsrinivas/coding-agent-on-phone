@@ -24,8 +24,8 @@ fun BotTerminalScreen(viewModel: DashboardViewModel) {
         ) {
             Text(
                 text = "Telegram bot not running. Start it from the Dashboard.",
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+                style = MaterialTheme.typography.bodyLarge,
             )
         }
     } else {
