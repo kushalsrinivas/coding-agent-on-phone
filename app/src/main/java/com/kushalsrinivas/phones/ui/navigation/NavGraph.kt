@@ -39,7 +39,6 @@ fun AppNavHost() {
 
     val botToken by settingsViewModel.botToken.collectAsState()
     val agentCommand by settingsViewModel.agentCommand.collectAsState()
-    val botCommand by settingsViewModel.botCommand.collectAsState()
 
     Scaffold(
         bottomBar = {
@@ -76,7 +75,6 @@ fun AppNavHost() {
                     viewModel = dashboardViewModel,
                     settingsBotToken = botToken,
                     settingsAgentCommand = agentCommand,
-                    settingsBotCommand = botCommand,
                 )
             }
             composable(Screen.Agent.route) {

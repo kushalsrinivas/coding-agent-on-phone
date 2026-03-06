@@ -17,19 +17,12 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val _agentCommand = MutableStateFlow("node agent/index.js")
     val agentCommand: StateFlow<String> = _agentCommand.asStateFlow()
 
-    private val _botCommand = MutableStateFlow("python bot/main.py")
-    val botCommand: StateFlow<String> = _botCommand.asStateFlow()
-
     fun setBotToken(token: String) {
         _botToken.value = token
     }
 
     fun setAgentCommand(cmd: String) {
         _agentCommand.value = cmd
-    }
-
-    fun setBotCommand(cmd: String) {
-        _botCommand.value = cmd
     }
 
     fun setAllowedUserIds(ids: String) {

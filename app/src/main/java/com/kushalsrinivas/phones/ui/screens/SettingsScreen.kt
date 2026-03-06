@@ -23,7 +23,6 @@ fun SettingsScreen(
 ) {
     val botToken by settingsViewModel.botToken.collectAsState()
     val agentCommand by settingsViewModel.agentCommand.collectAsState()
-    val botCommand by settingsViewModel.botCommand.collectAsState()
     val bootstrapState by dashboardViewModel.bootstrapManager.state.collectAsState()
 
     val allowedUserIds by settingsViewModel.securityConfig.allowedUserIds.collectAsState(initial = emptySet())
@@ -70,12 +69,10 @@ fun SettingsScreen(
                     singleLine = true,
                 )
 
-                OutlinedTextField(
-                    value = botCommand,
-                    onValueChange = { settingsViewModel.setBotCommand(it) },
-                    label = { Text("Bot startup command") },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
+                Text(
+                    text = "Bot: managed by pi-tele (npm install -g pi-tele → pi-tele setup → pi-tele start)",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }

@@ -120,14 +120,13 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         if (running == 1) startForegroundService()
     }
 
-    fun startBot(command: String, botToken: String) {
+    fun startBot(botToken: String) {
         processManager.startBot(
-            botCommand = command,
             botToken = botToken,
             socketPath = socketBridge.socketPath,
             onTextChanged = { addLog("[bot] output updated") }
         )
-        addLog("[system] Telegram bot started")
+        addLog("[system] Telegram bot started (pi-tele)")
 
         val running = processManager.processes.value.count { it.value.isRunning }
         if (running == 1) startForegroundService()

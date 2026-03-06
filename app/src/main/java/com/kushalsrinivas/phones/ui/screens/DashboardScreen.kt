@@ -21,7 +21,6 @@ fun DashboardScreen(
     viewModel: DashboardViewModel,
     settingsBotToken: String,
     settingsAgentCommand: String,
-    settingsBotCommand: String,
 ) {
     val bootstrapState by viewModel.bootstrapManager.state.collectAsState()
     val processes by viewModel.processManager.processes.collectAsState()
@@ -91,7 +90,7 @@ fun DashboardScreen(
                 Button(
                     onClick = {
                         viewModel.startAgent(settingsAgentCommand)
-                        viewModel.startBot(settingsBotCommand, settingsBotToken)
+                        viewModel.startBot(settingsBotToken)
                     },
                     enabled = !anyRunning,
                     modifier = Modifier.weight(1f),
@@ -133,11 +132,11 @@ fun DashboardScreen(
                 label = "Telegram Bot",
                 isRunning = botInfo?.isRunning == true,
                 uptimeText = uptimes[ProcessManager.BOT_ID] ?: "00:00:00",
-                onStart = { viewModel.startBot(settingsBotCommand, settingsBotToken) },
+                onStart = { viewModel.startBot(settingsBotToken) },
                 onStop = { viewModel.stopBot() },
                 onRestart = {
                     viewModel.stopBot()
-                    viewModel.startBot(settingsBotCommand, settingsBotToken)
+                    viewModel.startBot(settingsBotToken)
                 },
             )
 

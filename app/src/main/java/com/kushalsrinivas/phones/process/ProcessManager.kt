@@ -2,6 +2,7 @@ package com.kushalsrinivas.phones.process
 
 import android.util.Log
 import com.kushalsrinivas.phones.bootstrap.BootstrapManager
+import com.kushalsrinivas.phones.bot.PiTeleManager
 import com.kushalsrinivas.phones.terminal.TerminalSessionManager
 import com.termux.terminal.TerminalSession
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -98,14 +99,20 @@ class ProcessManager(
         return startProcess(AGENT_ID, "Coding Agent", config, onTextChanged)
     }
 
+    /**
+     * Starts the Telegram bot using the `pi-tele` npm CLI package.
+     *
+     * The three-step workflow (install → setup → start) is handled by
+     * [PiTeleManager]. The bot token is passed via the TELEGRAM_BOT_TOKEN
+     * environment variable so it never appears in process arguments or logs.
+     */
     fun startBot(
-        botCommand: String,
         botToken: String,
         socketPath: String,
         onTextChanged: () -> Unit = {},
     ): TerminalSession {
         val config = ProcessConfig(
-            command = botCommand,
+            command = PiTeleManager.buildBotCommand(),
             extraEnv = arrayOf(
                 "TELEGRAM_BOT_TOKEN=$botToken",
                 "SOCKET_PATH=$socketPath",
