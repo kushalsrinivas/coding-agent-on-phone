@@ -1,6 +1,7 @@
 package com.kushalsrinivas.phones.process
 
 import android.util.Log
+import com.kushalsrinivas.phones.agent.PiAgentManager
 import com.kushalsrinivas.phones.bootstrap.BootstrapManager
 import com.kushalsrinivas.phones.bot.PiTeleManager
 import com.kushalsrinivas.phones.terminal.TerminalSessionManager
@@ -87,14 +88,24 @@ class ProcessManager(
 
     fun getSession(id: String): TerminalSession? = sessionManager.getSession(id)
 
+    /**
+     * Starts the coding agent using the `@mariozechner/pi-coding-agent` npm CLI package.
+     *
+     * The install → run workflow is handled by [PiAgentManager]. The Anthropic API key
+     * is passed via the ANTHROPIC_API_KEY environment variable so it never appears in
+     * process arguments or logs.
+     */
     fun startAgent(
-        agentCommand: String,
+        anthropicApiKey: String,
         socketPath: String,
         onTextChanged: () -> Unit = {},
     ): TerminalSession {
         val config = ProcessConfig(
-            command = agentCommand,
-            extraEnv = arrayOf("SOCKET_PATH=$socketPath"),
+            command = PiAgentManager.buildAgentCommand(),
+            extraEnv = arrayOf(
+                "ANTHROPIC_API_KEY=$anthropicApiKey",
+                "SOCKET_PATH=$socketPath",
+            ),
         )
         return startProcess(AGENT_ID, "Coding Agent", config, onTextChanged)
     }

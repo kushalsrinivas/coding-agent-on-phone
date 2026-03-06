@@ -20,7 +20,7 @@ import com.kushalsrinivas.phones.viewmodel.DashboardViewModel
 fun DashboardScreen(
     viewModel: DashboardViewModel,
     settingsBotToken: String,
-    settingsAgentCommand: String,
+    settingsAnthropicApiKey: String,
 ) {
     val bootstrapState by viewModel.bootstrapManager.state.collectAsState()
     val processes by viewModel.processManager.processes.collectAsState()
@@ -89,7 +89,7 @@ fun DashboardScreen(
 
                 Button(
                     onClick = {
-                        viewModel.startAgent(settingsAgentCommand)
+                        viewModel.startAgent(settingsAnthropicApiKey)
                         viewModel.startBot(settingsBotToken)
                     },
                     enabled = !anyRunning,
@@ -118,11 +118,11 @@ fun DashboardScreen(
                 label = "Coding Agent",
                 isRunning = agentInfo?.isRunning == true,
                 uptimeText = uptimes[ProcessManager.AGENT_ID] ?: "00:00:00",
-                onStart = { viewModel.startAgent(settingsAgentCommand) },
+                onStart = { viewModel.startAgent(settingsAnthropicApiKey) },
                 onStop = { viewModel.stopAgent() },
                 onRestart = {
                     viewModel.stopAgent()
-                    viewModel.startAgent(settingsAgentCommand)
+                    viewModel.startAgent(settingsAnthropicApiKey)
                 },
             )
 

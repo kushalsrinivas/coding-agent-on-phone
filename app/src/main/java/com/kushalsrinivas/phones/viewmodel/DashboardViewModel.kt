@@ -105,16 +105,16 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         Log.i(TAG, "Foreground service stopped")
     }
 
-    fun startAgent(command: String) {
+    fun startAgent(anthropicApiKey: String) {
         socketBridge.ensureRunDir()
         socketBridge.cleanup()
 
         processManager.startAgent(
-            agentCommand = command,
+            anthropicApiKey = anthropicApiKey,
             socketPath = socketBridge.socketPath,
             onTextChanged = { addLog("[agent] output updated") }
         )
-        addLog("[system] Agent started")
+        addLog("[system] Coding agent started (pi-coding-agent)")
 
         val running = processManager.processes.value.count { it.value.isRunning }
         if (running == 1) startForegroundService()

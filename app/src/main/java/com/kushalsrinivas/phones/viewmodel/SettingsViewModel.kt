@@ -14,15 +14,15 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val _botToken = MutableStateFlow("")
     val botToken: StateFlow<String> = _botToken.asStateFlow()
 
-    private val _agentCommand = MutableStateFlow("node agent/index.js")
-    val agentCommand: StateFlow<String> = _agentCommand.asStateFlow()
+    private val _anthropicApiKey = MutableStateFlow("")
+    val anthropicApiKey: StateFlow<String> = _anthropicApiKey.asStateFlow()
 
     fun setBotToken(token: String) {
         _botToken.value = token
     }
 
-    fun setAgentCommand(cmd: String) {
-        _agentCommand.value = cmd
+    fun setAnthropicApiKey(key: String) {
+        _anthropicApiKey.value = key
     }
 
     fun setAllowedUserIds(ids: String) {

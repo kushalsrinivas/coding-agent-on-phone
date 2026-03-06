@@ -22,7 +22,7 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel,
 ) {
     val botToken by settingsViewModel.botToken.collectAsState()
-    val agentCommand by settingsViewModel.agentCommand.collectAsState()
+    val anthropicApiKey by settingsViewModel.anthropicApiKey.collectAsState()
     val bootstrapState by dashboardViewModel.bootstrapManager.state.collectAsState()
 
     val allowedUserIds by settingsViewModel.securityConfig.allowedUserIds.collectAsState(initial = emptySet())
@@ -56,17 +56,24 @@ fun SettingsScreen(
             }
         }
 
-        // Commands
+        // Coding Agent
         Card(modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text("Commands", style = MaterialTheme.typography.titleMedium)
+                Text("Coding Agent", style = MaterialTheme.typography.titleMedium)
 
                 OutlinedTextField(
-                    value = agentCommand,
-                    onValueChange = { settingsViewModel.setAgentCommand(it) },
-                    label = { Text("Agent startup command") },
+                    value = anthropicApiKey,
+                    onValueChange = { settingsViewModel.setAnthropicApiKey(it) },
+                    label = { Text("Anthropic API Key") },
+                    visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
+                )
+
+                Text(
+                    text = "Agent: managed by pi-coding-agent (npm install -g @mariozechner/pi-coding-agent → pi)",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
 
                 Text(
