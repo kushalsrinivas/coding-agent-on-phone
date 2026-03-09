@@ -90,7 +90,7 @@ fun DashboardScreen(
                 Button(
                     onClick = {
                         viewModel.startAgent(settingsAnthropicApiKey)
-                        viewModel.startBot(settingsBotToken)
+                        viewModel.startBot(settingsBotToken, settingsAnthropicApiKey)
                     },
                     enabled = !anyRunning,
                     modifier = Modifier.weight(1f),
@@ -132,11 +132,11 @@ fun DashboardScreen(
                 label = "Telegram Bot",
                 isRunning = botInfo?.isRunning == true,
                 uptimeText = uptimes[ProcessManager.BOT_ID] ?: "00:00:00",
-                onStart = { viewModel.startBot(settingsBotToken) },
+                onStart = { viewModel.startBot(settingsBotToken, settingsAnthropicApiKey) },
                 onStop = { viewModel.stopBot() },
                 onRestart = {
                     viewModel.stopBot()
-                    viewModel.startBot(settingsBotToken)
+                    viewModel.startBot(settingsBotToken, settingsAnthropicApiKey)
                 },
             )
 

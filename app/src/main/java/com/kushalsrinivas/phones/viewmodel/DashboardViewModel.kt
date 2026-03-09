@@ -120,9 +120,10 @@ class DashboardViewModel(application: Application) : AndroidViewModel(applicatio
         if (running == 1) startForegroundService()
     }
 
-    fun startBot(botToken: String) {
+    fun startBot(botToken: String, anthropicApiKey: String) {
         processManager.startBot(
             botToken = botToken,
+            anthropicApiKey = anthropicApiKey,
             socketPath = socketBridge.socketPath,
             onTextChanged = { addLog("[bot] output updated") }
         )

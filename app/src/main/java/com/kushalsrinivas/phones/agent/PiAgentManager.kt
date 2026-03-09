@@ -27,6 +27,10 @@ object PiAgentManager {
      */
     fun buildAgentCommand(): String = """
         set -e
+        if ! command -v node >/dev/null 2>&1; then
+            echo "[pi-agent] Node.js not found, installing via pkg..."
+            pkg update -y && pkg install -y nodejs
+        fi
         if ! command -v pi >/dev/null 2>&1; then
             echo "[pi-agent] Installing $PACKAGE globally..."
             npm install -g $PACKAGE

@@ -15,7 +15,7 @@ package com.kushalsrinivas.phones.bot
 object PiTeleManager {
 
     private const val PACKAGE = "pi-tele"
-    private const val VERSION = "0.1.0"
+    private const val VERSION = "0.2.0"
 
     /**
      * Returns a bash command string that:
@@ -29,6 +29,10 @@ object PiTeleManager {
      */
     fun buildBotCommand(): String = """
         set -e
+        if ! command -v node >/dev/null 2>&1; then
+            echo "[pi-tele] Node.js not found, installing via pkg..."
+            pkg update -y && pkg install -y nodejs
+        fi
         if ! command -v pi-tele >/dev/null 2>&1; then
             echo "[pi-tele] Installing $PACKAGE@$VERSION globally..."
             npm install -g $PACKAGE@$VERSION

@@ -119,6 +119,7 @@ class ProcessManager(
      */
     fun startBot(
         botToken: String,
+        anthropicApiKey: String,
         socketPath: String,
         onTextChanged: () -> Unit = {},
     ): TerminalSession {
@@ -126,6 +127,7 @@ class ProcessManager(
             command = PiTeleManager.buildBotCommand(),
             extraEnv = arrayOf(
                 "TELEGRAM_BOT_TOKEN=$botToken",
+                "ANTHROPIC_API_KEY=$anthropicApiKey",
                 "SOCKET_PATH=$socketPath",
             ),
         )
