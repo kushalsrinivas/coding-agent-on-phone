@@ -1,0 +1,27 @@
+{
+  "name": "pi-tele",
+  "version": "0.1.0",
+  "description": "A simple Telegram bot npm package",
+  "main": "src/index.js",
+  "bin": {
+    "pi-tele": "bin/cli.js"
+  },
+  "scripts": {
+    "start": "node bin/cli.js start",
+    "setup": "node bin/cli.js setup",
+    "status": "node bin/cli.js status"
+  },
+  "preferGlobal": true,
+  "keywords": [
+    "telegram",
+    "bot",
+    "pi-tele"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.3",
+    "dotenv": "^16.4.7",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}
